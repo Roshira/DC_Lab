@@ -38,3 +38,5 @@ for i = 0 to Size-1:
 mpic++ -o ParallelMV ParallelMV.cpp
 # Запуск
 mpiexec --allow-run-as-root -n 2 ./ParallelMV
+mpiexec --allow-run-as-root --oversubscribe -n
+ 8 ./ParallelMV запуск на моєму компютері якщо 4 8 процесів бо не виитягує
