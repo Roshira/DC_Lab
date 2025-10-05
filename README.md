@@ -40,3 +40,25 @@ mpic++ -o ParallelMV ParallelMV.cpp
 mpiexec --allow-run-as-root -n 2 ./ParallelMV
 mpiexec --allow-run-as-root --oversubscribe -n
  8 ./ParallelMV запуск на моєму компютері якщо 4 8 процесів бо не виитягує
+
+### Корисні команди
+# Компіляція послідовної програми
+g++ -o SerialMV SerialMV.cpp
+
+# Запуск послідовної програми
+./SerialMV
+
+# Компіляція паралельної програми
+mpic++ -o ParallelMV ParallelMV.cpp
+
+# Запуск паралельної програми на 4 процесах
+mpiexec --allow-run-as-root --oversubscribe -n 4 ./ParallelMV
+
+# Запуск на 2 процесах
+mpiexec --allow-run-as-root --oversubscribe -n 2 ./ParallelMV
+
+# Перехід в директорію
+cd ~/lab_DC
+
+# Перегляд вмісту директорії
+ls
