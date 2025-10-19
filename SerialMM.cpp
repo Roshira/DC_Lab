@@ -1,6 +1,6 @@
-#include <stdio.h>  
-#include <stdlib.h>  
-#include <time.h>  
+#include <cstdio>  // Для printf, scanf
+#include <cstdlib> // Для rand, srand, new, delete
+#include <ctime>   // Для clock, time_t, CLOCKS_PER_SEC
 
 // Function for simple initialization of matrix elements
 void DummyDataInitialization (double* pAMatrix,double* pBMatrix,int Size) {
@@ -95,37 +95,80 @@ void ProcessTermination (double* pAMatrix, double* pBMatrix,   double* pCMatrix)
     delete [] pCMatrix;
 }  
 
+int main() {
+    double* pAMatrix; // First argument of matrix multiplication
+    double* pBMatrix; // Second argument of matrix multiplication
+    double* pCMatrix; // Result matrix
+    int Size; // Size of matrices
+    clock_t start, finish; // Змінено time_t на clock_t
+    double duration;
+
+    printf("Serial matrix multiplication program\n");
+
+    // TESTS 1-8
+    // ПРИМІТКА: Виправлено помилку з вкладеним циклом. 
+    // Залишено один цикл, що проводить 8 тестів.
+    for(int i = 0; i < 8; i++) {
+        printf("\nTest %d", (i + 1));
+
+        // Визначення розміру матриці
+        if (i == 0)
+            Size = 10;
+        else if (i == 1)
+            Size = 100;
+        else
+            Size = 500 + (i - 2) * 500;
+
+        // Memory allocation and initialization of matrix elements
+        ProcessInitializationTest(pAMatrix, pBMatrix, pCMatrix, Size);
+        
+        // Matrix multiplication
+        start = clock();
+        SerialResultCalculation(pAMatrix, pBMatrix, pCMatrix, Size);
+        finish = clock();
+        duration = (finish-start)/double(CLOCKS_PER_SEC);
+
+        // Printing the time spent by matrix multiplication
+        printf("\nTime of execution: %f\n", duration);
+
+        // Computational process termination
+        ProcessTermination(pAMatrix, pBMatrix, pCMatrix);
+    }
+    
+    return 0; // Додано повернення значення
+}
+
 // int main() {
-//     double* pAMatrix; // First argument of matrix multiplication
-//     double* pBMatrix; // Second argument of matrix multiplication
-//     double* pCMatrix; // Result matrix
-//     int Size; // Size of matrices
-//     time_t start, finish;
-//     double duration;
+//      double* pAMatrix; // First argument of matrix multiplication
+//      double* pBMatrix; // Second argument of matrix multiplication
+//      double* pCMatrix; // Result matrix
+//      int Size; // Size of matrices
+//      time_t start, finish;
+//      double duration;
 
-//     printf("Serial matrix multiplication program\n");
+//      printf("Serial matrix multiplication program\n");
     
-//     // Memory allocation and initialization of matrix elements
-//     ProcessInitialization(pAMatrix, pBMatrix, pCMatrix, Size);
+//      // Memory allocation and initialization of matrix elements
+//      ProcessInitialization(pAMatrix, pBMatrix, pCMatrix, Size);
 
-//     // Matrix output
-//     printf ("Initial A Matrix \n");
-//     PrintMatrix(pAMatrix, Size, Size);
-//     printf("Initial B Matrix \n");
-//     PrintMatrix(pBMatrix, Size, Size);
+//      // Matrix output
+//      printf ("Initial A Matrix \n");
+//      PrintMatrix(pAMatrix, Size, Size);
+//      printf("Initial B Matrix \n");
+//      PrintMatrix(pBMatrix, Size, Size);
     
-//     // Matrix multiplication
-//     start = clock();
-//     SerialResultCalculation(pAMatrix, pBMatrix, pCMatrix, Size);   finish = clock();
-//     duration = (finish-start)/double(CLOCKS_PER_SEC);
+//      // Matrix multiplication
+//      start = clock();
+//      SerialResultCalculation(pAMatrix, pBMatrix, pCMatrix, Size);   finish = clock();
+//      duration = (finish-start)/double(CLOCKS_PER_SEC);
 
-//     // Printing the result matrix
-//     printf ("\n Result Matrix: \n");
-//     PrintMatrix(pCMatrix, Size, Size);
+//      // Printing the result matrix
+//      printf ("\n Result Matrix: \n");
+//      PrintMatrix(pCMatrix, Size, Size);
 
-//     // Printing the time spent by matrix multiplication
-//     printf("\n Time of execution: %f\n", duration);
+//      // Printing the time spent by matrix multiplication
+//      printf("\n Time of execution: %f\n", duration);
 
-//     // Computational process termination
-//     ProcessTermination(pAMatrix, pBMatrix, pCMatrix);
+//      // Computational process termination
+//      ProcessTermination(pAMatrix, pBMatrix, pCMatrix);
 // }
