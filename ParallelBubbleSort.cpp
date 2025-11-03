@@ -199,9 +199,16 @@ void DataCollection(double *pData, int DataSize, double *pProcData, int BlockSiz
 
 // Паралельний алгоритм сортування бульбашкою
 void ParallelBubble(double *pProcData, int BlockSize) {
+    
+    // ==========================================================
+    // ЗМІНА ТУТ:
+    // ==========================================================
+    
     // Локальне сортування даних процесу
-    // SerialBubbleSort(pProcData, BlockSize);
-    SerialStdSort(pProcData, BlockSize);
+    SerialBubbleSort(pProcData, BlockSize);
+    // SerialStdSort(pProcData, BlockSize); // <--- Тепер це закоментовано
+
+    // ==========================================================
 
     int Offset;
     split_mode SplitMode;
